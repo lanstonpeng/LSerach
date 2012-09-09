@@ -2,7 +2,7 @@ import urllib2
 
 def get_page(url):
     try:
-        return urllib2.urllopen(url).read()
+        return urllib2.urlopen(url).read()
     except:
         return ""
 
@@ -85,7 +85,7 @@ def hashtable_get_bucket(htable,key):
 def hashtable_lookup(htable,key):
     bucket = hashtabl_get_bucket(htable,key)
     for entry in bucket :
-        if entry[0] == key
+        if entry[0] == key :
             return entry[1]
     return None
 
@@ -96,6 +96,7 @@ def crawl_web(seed,max_pages):
     graph = {}
     while tocrawl and len(crawled) < max_pages :
         page = tocrawl.pop()
+        print page
         if page not in crawled :
             content = get_page(page)
             add_page_to_index(index,page,content)
@@ -104,6 +105,10 @@ def crawl_web(seed,max_pages):
             union(tocrawl,outlinks)
             crawled.append(page)
     return index,graph
+
+
+i,g = crawl_web("http://www.baidu.com",1)
+print g
 
 def compute_ranks(graph):
     d = 0.8 # damping factor
@@ -124,3 +129,5 @@ def compute_ranks(graph):
             newranks[page] = newrank
         ranks = newranks
     return ranks
+
+
