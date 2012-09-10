@@ -8,23 +8,21 @@ def crawl_web(seed,max_pages):
     graph = {}
     while tocrawl and len(crawled) < max_pages :
         page = tocrawl.pop()
+        #print "the page is ",page
         if page not in crawled :
             content = get_page(page)
             #add_page_to_index(index,page,content)
             outlinks = get_all_links( content ,page)
             #graph[page] = outlinks
-           
+
             union(tocrawl,outlinks)
-            print "------------------------",tocrawl
             crawled.append(page)
     #return index,graph
     return crawled
 
 def union(p,q):
     for e in  q:
-        print e
         if e not in p:
-            print "yep"
             p.append(e)
 
 def get_page(url):
@@ -39,10 +37,13 @@ def get_all_links(content,parentURL):
     soup = BeautifulSoup(content)
     result = []
     for link in soup.findAll("a"):
-        url = link.get("href")
-        if url.find("http") < 0 :
-            url = parentURL + url
-        result.append(url)
+        try:
+            url = link.get("href")
+            if url.find("http") < 0 :
+                url = parentURL + url
+            result.append(url)
+        except:
+            pass
     return result
 
 print crawl_web('http://www.baidu.com',10)
