@@ -17,8 +17,7 @@ def crawl_web(seed,max_pages):
 
             union(tocrawl,outlinks)
             crawled.append(page)
-    #return index,graph
-    return crawled
+    return index,graph
 
 def union(p,q):
     for e in  q:
@@ -46,6 +45,6 @@ def get_all_links(content,parentURL):
             pass
     return result
 
-print crawl_web('http://www.baidu.com',10)
+#print crawl_web('http://www.baidu.com',10)
 
 
