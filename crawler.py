@@ -1,4 +1,5 @@
 import urllib2,requests
+import indexing
 from bs4 import BeautifulSoup
 
 def crawl_web(seed,max_pages):
@@ -8,13 +9,11 @@ def crawl_web(seed,max_pages):
     graph = {}
     while tocrawl and len(crawled) < max_pages :
         page = tocrawl.pop()
-        #print "the page is ",page
         if page not in crawled :
             content = get_page(page)
-            #add_page_to_index(index,page,content)
+            indexing.add_page_to_index(index,page,content)
             outlinks = get_all_links( content ,page)
-            #graph[page] = outlinks
-
+            graph[page] = outlinks
             union(tocrawl,outlinks)
             crawled.append(page)
     return index,graph
@@ -45,6 +44,6 @@ def get_all_links(content,parentURL):
             pass
     return result
 
-#print crawl_web('http://www.baidu.com',10)
+print crawl_web('http://www.ifanr.com',5)[1]
 
 
