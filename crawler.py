@@ -1,7 +1,7 @@
 import urllib2,requests
+from bs4 import BeautifulSoup
 import indexing
 import filterPage
-from bs4 import BeautifulSoup
 
 def crawl_web(seed,max_pages):
     tocrawl = [seed]
@@ -44,10 +44,13 @@ def get_all_links(content,parentURL):
         except:
             pass
     return result
+
+print crawl_web('http://news.ycombinator.com',1)
+
+'''
 soup = BeautifulSoup(get_page("http://news.ycombinator.com"))
 soup.encode("utf-8")
 print filterPage.filter_text( soup.findAll(text=True) )
-#print BeautifulSoup(get_page("http://www.ifanr.com"),from_encoding="utf-8").findAll(text=True)
-#print crawl_web('http://www.ifanr.com',1)[0]
-
+print BeautifulSoup(get_page("http://www.ifanr.com"),from_encoding="utf-8").findAll(text=True)
+'''
 

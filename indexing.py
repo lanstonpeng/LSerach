@@ -1,4 +1,6 @@
 #Indexing
+import filterPage
+from bs4 import BeautifulSoup
 def add_to_index(index,keyword,url):
     if keyword in index:
         if url not in index[keyword] :
@@ -8,7 +10,8 @@ def add_to_index(index,keyword,url):
 
 def add_page_to_index(index,url,content):
     try :
-        words = content.split()
+        soup = BeautifulSoup(content)
+        words = filterPage.filter_text(soup.findAll(text=True))
         for word in words:
             add_to_index(index,word,url)
     except:
