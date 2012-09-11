@@ -22,16 +22,21 @@ def compute_ranking(times,graph):
 	results={}
 	N = len(graph)
 	for page in graph:
-		results[page] = (1-d) * 1.0/N
+		results[page] = 1.0/N
 	#print results
 	for i in range(0,times):
+		temprank = {}
 		for page in graph:
-			rank = results[page]
+			#rank = results[page]
+			rank = (1-d)/N
 			for node in graph:
 				if page in graph[node]:
 					rank += d * results[node]/(len(graph[node]))
-			results[page] = rank
+			temprank[page] = rank
+		results = temprank
 	return  results
+
+
 #testing
 graph = {
 	"a":["b","c"],
