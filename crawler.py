@@ -45,7 +45,7 @@ def get_all_links(content,parentURL):
             pass
     return result
 
-print crawl_web('http://news.ycombinator.com',1)
+print crawl_web('http://news.ycombinatort.com',1)
 
 '''
 soup = BeautifulSoup(get_page("http://news.ycombinator.com"))
